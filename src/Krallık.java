@@ -1,8 +1,9 @@
-
-
 import java.util.Random;
 import java.util.Scanner;
-
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -12,7 +13,6 @@ import java.util.Scanner;
  * @author hatic
  */
 public class Krallık {
-
 
     private int altin;
     private int yiyecek;
