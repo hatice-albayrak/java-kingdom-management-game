@@ -100,18 +100,8 @@ public class Krallık {
         System.out.println("4 - Turu bitir ");
 
         //yapılacak yatırımı seçeceğiz  
-
-        int secim;
-        while (true) {
-            System.out.print("Seciminiz: ");
-            secim = sc.nextInt();
-
-            if (secim >= 1 && secim <= 4) {
-                break;
-            }
-
-            System.out.println("Hatali giris! 1 ile 4 arasinda bir deger giriniz.");
-        }
+       
+int secim = sayiOkuAralik("Seciminiz: ", 1, 4);
 
         switch (secim) {
             case 1: 
