@@ -283,6 +283,43 @@ int secim = sayiOkuAralik("Seciminiz: ", 1, 4);
     }
 
     
+public void oyunuKaydet() {
+    try (FileWriter writer = new FileWriter("savegame.txt")) {
+
+        writer.write(turSayisi + "\n");
+        writer.write(altin + "\n");
+        writer.write(yiyecek + "\n");
+        writer.write(halkMemnuniyeti + "\n");
+        writer.write(guvenlikSeviyesi + "\n");
+        writer.write(orduGucu + "\n");
+        writer.write(vergiOrani + "\n");
+
+        writer.write(sehirler.length + "\n");
+
+        for (Şehir sehir : sehirler) {
+            writer.write(sehir.getTip() + "\n");
+            writer.write(sehir.getAd() + "\n");
+            writer.write(sehir.getUretimKapasitesi() + "\n");
+            writer.write(sehir.getX() + "\n");
+            writer.write(sehir.getY() + "\n");
+            writer.write(sehir.getGelisimSeviyesi() + "\n");
+            writer.write(sehir.getOrduSeviyesi() + "\n");
+            writer.write(sehir.getGuvenlikSeviyesi() + "\n");
+            writer.write(sehir.getHalkMemnuniyeti() + "\n");
+            writer.write(sehir.getVergiOrani() + "\n");
+            writer.write(sehir.getBaskinIhtimali() + "\n");
+            writer.write(sehir.getDepoAltin() + "\n");
+            writer.write(sehir.getDepoYiyecek() + "\n");
+        }
+
+        System.out.println("Oyun basariyla kaydedildi!");
+
+    } catch (IOException e) {
+        System.out.println("Kayit hatasi: " + e.getMessage());
+    }
+}
+
+    
     public int sayiOkuAralik(String mesaj, int min, int max) {
         int x;
         while (true) {
