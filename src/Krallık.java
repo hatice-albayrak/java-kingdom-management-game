@@ -84,45 +84,44 @@ public class Krallık {
     }
        
 
-    private void turuOyna() {
+    
+private void turuOyna() {
 
-        System.out.println("-----" + turSayisi + ".Tur ---------------");
-        
-       durumYazdir(); // krallığın mevcut durumu yazdırılır
-       menuYazdir(); // oyuncuya menü gösterilir 
-       sehirleriGoruntule();
-        
-        System.out.println(); 
+    System.out.println("-----" + turSayisi + ". Tur -----");
 
-        System.out.println("1- Sehirleri Goruntule");
-        System.out.println("2 - sehre yatirim yap");
-        System.out.println("3 - Vergi ayarla");
-        System.out.println("4 - Turu bitir ");
+    boolean turBitti = false;
 
-        //yapılacak yatırımı seçeceğiz  
-       
-int secim = sayiOkuAralik("Seciminiz: ", 1, 4);
+    while (!turBitti) {
+
+        durumYazdir();
+        menuYazdir();
+
+        int secim = sayiOkuAralik("Seciminiz: ", 1, 5);
 
         switch (secim) {
-            case 1: 
-                sehirleriGoruntule(); 
-            break;
+            case 1:
+                sehirleriGoruntule();
+                break;
+
             case 2:
                 sehireYatirimYap();
                 break;
+
             case 3:
                 vergiyiAyarla();
                 break;
+
             case 4:
-                System.out.println("Tur sonlandiriliyor...");
+                oyunuKaydet();
                 break;
-          default: // sayiOkuAralik zaten sınır kontrolü yapıyor 
-              break;
+
+            case 5:
+                System.out.println("Tur sonlandiriliyor...");
+                turBitti = true;
+                break;
         }
-        // Metot sonlandığında 'secim' değişkeni scope dışına çıkar ve unutulur
-    }  
-      
-    
+    }
+}
     
     
 // Krallığın durumunu yazdır
@@ -158,13 +157,16 @@ int secim = sayiOkuAralik("Seciminiz: ", 1, 4);
         }
     }
 
-    public void menuYazdir() {
-        System.out.println("\nNe yapmak istersiniz?");
-        System.out.println("1) Sehirleri goruntule");
-        System.out.println("2) Sehire yatirim yap");
-        System.out.println("3) Vergi oranini ayarla");
-        System.out.println("4) Turu bitir");
-    }
+    
+public void menuYazdir() {
+    System.out.println("\n===== KRALLIK YONETIMI =====");
+    System.out.println("1 - Sehirleri goruntule");
+    System.out.println("2 - Sehre yatirim yap");
+    System.out.println("3 - Vergi oranini ayarla");
+    System.out.println("4 - Oyunu kaydet");
+    System.out.println("5 - Turu bitir");
+}
+
 
     // Şehirleri listele
     public void sehirleriGoruntule() {
