@@ -320,6 +320,88 @@ public void oyunuKaydet() {
 }
 
     
+public void oyunuYukle() {
+    try (BufferedReader reader =
+            new BufferedReader(new FileReader("savegame.txt"))) {
+
+        int yeniTur = Integer.parseInt(reader.readLine());
+        int yeniAltin = Integer.parseInt(reader.readLine());
+        int yeniYiyecek = Integer.parseInt(reader.readLine());
+        int yeniMemnuniyet = Integer.parseInt(reader.readLine());
+        int yeniGuvenlik = Integer.parseInt(reader.readLine());
+        int yeniOrdu = Integer.parseInt(reader.readLine());
+        int yeniVergi = Integer.parseInt(reader.readLine());
+
+        int sehirSayisi = Integer.parseInt(reader.readLine());
+
+        if (sehirSayisi != sehirler.length) {
+            System.out.println("Kayit dosyasi uyumsuz!");
+            return;
+        }
+
+        Şehir[] yeniSehirler = new Şehir[sehirSayisi];
+
+        for (int i = 0; i < sehirSayisi; i++) {
+            String tip = reader.readLine();
+            String ad = reader.readLine();
+
+            int kapasite = Integer.parseInt(reader.readLine());
+            int x = Integer.parseInt(reader.readLine());
+            int y = Integer.parseInt(reader.readLine());
+
+            Şehir sehir;
+
+            switch (tip) {
+                case "Ticaret":
+                    sehir = new Ticaret_sehri(ad, kapasite, x, y);
+                    break;
+                case "Tarim":
+                    sehir = new Tarim_sehri(ad, kapasite, x, y);
+                    break;
+                case "Sanayi":
+                    sehir = new Sanayi_sehri(ad, kapasite, x, y);
+                    break;
+                default:
+                    throw new IOException("Bilinmeyen sehir tipi: " + tip);
+            }
+
+            sehir.setGelisimSeviyesi(
+                    Integer.parseInt(reader.readLine()));
+            sehir.setOrduSeviyesi(
+                    Integer.parseInt(reader.readLine()));
+            sehir.setGuvenlikSeviyesi(
+                    Integer.parseInt(reader.readLine()));
+            sehir.setHalkMemnuniyeti(
+                    Integer.parseInt(reader.readLine()));
+            sehir.setVergiOrani(
+                    Integer.parseInt(reader.readLine()));
+            sehir.setBaskinIhtimali(
+                    Integer.parseInt(reader.readLine()));
+            sehir.setDepoAltin(
+                    Integer.parseInt(reader.readLine()));
+            sehir.setDepoYiyecek(
+                    Integer.parseInt(reader.readLine()));
+
+            yeniSehirler[i] = sehir;
+        }
+
+        turSayisi = yeniTur;
+        altin = yeniAltin;
+        yiyecek = yeniYiyecek;
+        halkMemnuniyeti = yeniMemnuniyet;
+        guvenlikSeviyesi = yeniGuvenlik;
+        orduGucu = yeniOrdu;
+        vergiOrani = yeniVergi;
+        sehirler = yeniSehirler;
+
+        System.out.println("Oyun basariyla yuklendi!");
+
+    } catch (IOException | NumberFormatException e) {
+        System.out.println("Yukleme hatasi: " + e.getMessage());
+    }
+}
+   
+    
     public int sayiOkuAralik(String mesaj, int min, int max) {
         int x;
         while (true) {
@@ -413,16 +495,3 @@ public void oyunuKaydet() {
     
     
 }
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-   
