@@ -58,31 +58,49 @@ public class Krallık {
     }
     
       // Oyunu başlat
-    public void oyunuBaslat() {
-        System.out.println(" -----Krallik Oyunu Basladi !--------");
-        // Oyun bitene kadar tur oyna neden while kaç tur bilinmiyor
+    
+public void oyunuBaslat() {
 
-         while (turSayisi <= max_turSayisi && !oyunBittiMi()) {
-  
-        System.out.println();
-        System.out.println("-----" + turSayisi + ".Tur -----");
-        
-          // Her tur: turuOyna() çağrılır (seçim burada lokal tutulur)   
-        turuOyna();    // oyuncuya menü sunulur    
-        
-        // Tur sonu üretimi hesapla ve kaynakları güncelle
-        turSonuUretim();
-        // Tur sayısını artır
-        turSayisi++; }
-        
+    System.out.println("===== KINGDOM MANAGEMENT GAME =====");
+    System.out.println("1 - Yeni oyun baslat");
+    System.out.println("2 - Kayitli oyunu yukle");
+    System.out.println("3 - Cikis");
 
-         System.out.println(" OYUN BITTI");
-        System.out.println("Son Durum → Altin: " + altin + " | Yiyecek: " + yiyecek     
-                + " | Memnuniyet: " + halkMemnuniyeti 
-                + " | Guvenlik: " + guvenlikSeviyesi 
-                + " | Ordu: " + orduGucu);
+    int secim = sayiOkuAralik("Seciminiz: ", 1, 3);
+
+    if (secim == 3) {
+        System.out.println("Oyundan cikiliyor...");
+        return;
     }
-       
+
+    
+if (secim == 2) {
+    if (!oyunuYukle()) {
+        System.out.println("Kayit yuklenemedi. Ana menuye donuluyor.");
+        return;
+    }
+}
+
+
+    System.out.println("----- Krallik Oyunu Basladi! -----");
+
+    while (turSayisi <= max_turSayisi && !oyunBittiMi()) {
+
+        System.out.println("\n----- " + turSayisi + ". Tur -----");
+
+        turuOyna();
+        turSonuUretim();
+        turSayisi++;
+    }
+
+    System.out.println("OYUN BITTI");
+    System.out.println("Son Durum -> Altin: " + altin
+            + " | Yiyecek: " + yiyecek
+            + " | Memnuniyet: " + halkMemnuniyeti
+            + " | Guvenlik: " + guvenlikSeviyesi
+            + " | Ordu: " + orduGucu);
+}
+
 
     
 private void turuOyna() {
@@ -322,7 +340,7 @@ public void oyunuKaydet() {
 }
 
     
-public void oyunuYukle() {
+public boolean oyunuYukle() {
     try (BufferedReader reader =
             new BufferedReader(new FileReader("savegame.txt"))) {
 
@@ -338,7 +356,7 @@ public void oyunuYukle() {
 
         if (sehirSayisi != sehirler.length) {
             System.out.println("Kayit dosyasi uyumsuz!");
-            return;
+            return false;
         }
 
         Şehir[] yeniSehirler = new Şehir[sehirSayisi];
@@ -402,10 +420,14 @@ switch (tip) {
         sehirler = yeniSehirler;
 
         System.out.println("Oyun basariyla yuklendi!");
+        return true;
 
-    } catch (IOException | NumberFormatException e) {
-        System.out.println("Yukleme hatasi: " + e.getMessage());
-    }
+        
+   } catch (IOException | NumberFormatException e) {
+       System.out.println("Yukleme hatasi: " + e.getMessage());
+          return false;
+     }
+
 }
    
     
