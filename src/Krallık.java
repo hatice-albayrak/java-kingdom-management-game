@@ -351,19 +351,24 @@ public void oyunuYukle() {
 
             Şehir sehir;
 
-            switch (tip) {
-                case "Ticaret":
-                    sehir = new Ticaret_sehri(ad, kapasite, x, y);
-                    break;
-                case "Tarim":
-                    sehir = new Tarim_sehri(ad, kapasite, x, y);
-                    break;
-                case "Sanayi":
-                    sehir = new Sanayi_sehri(ad, kapasite, x, y);
-                    break;
-                default:
-                    throw new IOException("Bilinmeyen sehir tipi: " + tip);
-            }
+            
+switch (tip) {
+    case "Deniz Ticaret kenti":
+        sehir = new Ticaret_sehri(ad, kapasite, x, y);
+        break;
+
+    case "Tarim Ovasi":
+        sehir = new Tarim_sehri(ad, kapasite, x, y);
+        break;
+
+    case "Sanayi sehri":
+        sehir = new Sanayi_sehri(ad, kapasite, x, y);
+        break;
+
+    default:
+        throw new IOException("Bilinmeyen sehir tipi: " + tip);
+}
+
 
             sehir.setGelisimSeviyesi(
                     Integer.parseInt(reader.readLine()));
