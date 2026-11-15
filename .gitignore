@@ -16,3 +16,6 @@ target/
 # Operating system files
 .DS_Store
 Thumbs.db
+
+# Game save files
+savegame.txt
